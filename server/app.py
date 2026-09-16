@@ -98,6 +98,40 @@ def check_session():
         "id": user.id,
         "username": user.username
     }, 200
+@app.route("/notes", methods=["GET"])
+@jwt_required()
+def get_notes():
+    user_id = int(get_jwt_identity())
+
+    page = request.args.get("page", 1, type=int)
+    per_page = request.args.get("per_page", 5, type=int)
+
+    pagination = Note.query.filter_by(user_id=user_id).paginate(
+        page=page,
+        per_page=per_page,
+        error_out=False
+    )
+
+    notes = []
+
+    for note in pagination.items:
+        notes.append({
+            "id": note.id,
+            "title": note.title,
+            "content": note.content,
+            "created_at": note.created_at.isoformat(),
+            "user_id": note.user_id
+        })
+
+    return {
+        "notes": notes,
+        "pagination": {
+            "page": pagination.page,
+            "per_page": pagination.per_page,
+            "total": pagination.total,
+            "pages": pagination.pages
+        }
+    }, 200
 
 @app.route("/notes", methods=["GET"])
 @jwt_required()
