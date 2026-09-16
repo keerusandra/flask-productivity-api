@@ -51,10 +51,10 @@ flask-productivity-api/
 Clone the repository:
 
 ```bash
-git clone https://github.com/keerusandra/flask-productivity-api
+git clone https://github.com/keerusandra/flask-productivity-api.git
 ```
 
-Navigate into the project:
+Navigate into the project directory:
 
 ```bash
 cd flask-productivity-api
@@ -92,7 +92,7 @@ The API uses JSON Web Tokens (JWT) to protect authenticated endpoints.
 
 After successfully logging in, the API returns an access token.
 
-Include the token in requests to protected endpoints using:
+Include the token in requests to protected endpoints using the following Authorization header:
 
 ```text
 Authorization: Bearer <access_token>
@@ -136,7 +136,7 @@ Example request:
 }
 ```
 
-### Check Session
+### Check Authentication
 
 **GET** `/check_session`
 
@@ -227,9 +227,7 @@ The application has been deployed remotely using Render.
 
 **Live API:**
 
-```text
 https://flask-productivity-api-4.onrender.com
-```
 
 The root endpoint should return:
 
@@ -271,5 +269,4 @@ Authentication-protected endpoints require the JWT access token returned from th
 
 ## Author
 
-Flask Productivity API project developed as part of a Flask backend development assignment.
-
+Flask Productivity API project developed as part of a Flask backend development lab assignment.
